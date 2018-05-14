@@ -13,7 +13,7 @@ For number 2 and 3 you can follow my blog post: [Headless authentication against
 
 
 ## Other notes ##
-1. All of the code is in the package "CRMWebApiAccessor.pm" file.
+1. All of the code is in the package "CRMWebApiAccessor.pm" file. The scripts expect the package to be availabe at a subfolder named BIN
 2. Once you setup an instance of your class, you just need to call getData to get the data you need.
 
 ```
