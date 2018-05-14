@@ -15,7 +15,12 @@ my $crmApiUrl = $crmUrl . "api/data/V8.2/";
 my $clientId="00000000-0000-0000-0000-000000000000";
 my $clientSecret="yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy";
 
-my $c = new CrmWebApiAccessor('crmUrl' => $crmUrl, 'crmApiUrl' => $crmApiUrl, 'clientId' => $clientId,  'clientSecret' => $clientSecret, 'debug' => 1, 'traceLevel' => 2);
+my $c = new CrmWebApiAccessor(
+	'crmUrl' => $crmUrl, 
+	'crmApiUrl' => $crmApiUrl, 
+	'clientId' => $clientId,  
+	'clientSecret' => $clientSecret, 
+	'debug' => 1, 'traceLevel' => 2);
 
 my (@data) = $c->getData('systemusers?$top=2&$select=fullname');
 
