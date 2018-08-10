@@ -20,7 +20,8 @@ my $c = new CrmWebApiAccessor(
 	'crmApiUrl' => $crmApiUrl, 
 	'clientId' => $clientId,  
 	'clientSecret' => $clientSecret, 
-	'debug' => 1, 'traceLevel' => 2);
+	'debug' => 1, 'traceLevel' => 2,
+	'logfile'=>"output.txt" );
 
 my (@data) = $c->getData('systemusers?$top=2&$select=fullname');
 
