@@ -48,6 +48,17 @@ sub new {
 			print 'traceLevel:' . $this->{traceLevel} . "\n\n";
 		}
 	}
+
+	if (defined $parm{'logfile'}) {
+		my $filename=$parm{'logfile'};
+		my $log_fh;		
+		if (-e $filename) {						
+			$log_fh =IO::File->new($filename,O_WRONLY|O_APPEND);
+		}else{
+			$log_fh =new IO::File $filename, "w";
+		}
+		$this->{logfile}=$log_fh;
+	}
 	
 	bless $this, $type;		
 }
@@ -58,6 +69,11 @@ sub debugPrint {
     if (defined $this->{debug} && $traceLevel >= $this->{traceLevel})
 	{
 		print $msg . "\n";
+
+		if ($this->{logfile}) {
+			my $log_fh=$this->{logfile};
+			print $log_fh $msg . "\n";
+		}
 	}
 }
 
@@ -142,7 +158,7 @@ sub getData{
 	my $queryUri = $this->{crmApiUrl} . $query;
 	debugPrint($this, $queryUri, 3);
 	
-	if (DateTime->now > $this->{expiresAt})
+	if (DateTime->now >= $this->{expiresAt})
 	{
 		debugPrint($this, 'token expired, getting new token' . "\n", 3);
 		getToken($this);
